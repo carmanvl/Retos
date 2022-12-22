@@ -1,4 +1,3 @@
-
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -10,16 +9,15 @@ import dash_bootstrap_components as dbc
 from dash import Input, Output
 from flask import render_template
 
-app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
+dash.register_page(__name__, name='añadirFinca', path='/')
 
-
-app.layout = dbc.Container(
+fincas_layout = dbc.Container(
     [
         html.H3("Añadir finca"),
-        html.Div(
+        dbc.Container(
             id='div-row1-f',
             children=[
-                html.Div(
+                dbc.Row(
                     id='div-input-name-f',
                     children=[
                         html.H3("Nombre de la finca"),
@@ -31,7 +29,7 @@ app.layout = dbc.Container(
                         )
                     ], className='six colums'
                 ),
-                html.Div(
+                dbc.Row(
                     id='div-dropdown-variedad-f',
                     children=[
                         html.H3("Variedad"),
@@ -49,7 +47,7 @@ app.layout = dbc.Container(
                         )
                     ], className='six colums'
                 ),
-                html.Div(
+                dbc.Row(
                     id='div-input-espaciamiento-f',
                     children=[
                         html.H3('Espaciamiento'),
@@ -68,7 +66,7 @@ app.layout = dbc.Container(
                         html.H3('m')
                     ], className='four colums'
                 ),
-                html.Div(
+                dbc.Row(
                     id='div-dropdown-suelo-f',
                     children=[
                         html.H3("Tipo de suelo"),
@@ -83,7 +81,7 @@ app.layout = dbc.Container(
                         )
                     ], className='six colums'
                 ),
-                html.Div(
+                dbc.Row(
                     id='div-checklist-riego-f',
                     children=[
                         html.H3("Riego"),
@@ -96,7 +94,7 @@ app.layout = dbc.Container(
                         )
                     ], className='row'
                 ),
-                html.Div(
+                dbc.Row(
                     id='div-dropdown-recogida-f',
                     children=[
                         html.H3("Forma de recogida"),
@@ -114,10 +112,10 @@ app.layout = dbc.Container(
                         )
                     ], className='row'
                 ),
-                html.Div(
+                dbc.Row(
                     id='div-dropdown-lugar-f',
                     children=[
-                        html.Div(
+                        dbc.Col(
                             id='div-dropdown-provincia-f',
                             children=[
                                 html.H3('Provincia'),
@@ -135,7 +133,7 @@ app.layout = dbc.Container(
                                 )
                             ], className='six colums'
                         ),
-                        html.Div(
+                        dbc.Col(
                             id='div-dropdown-municipio-f',
                             children=[
                                 html.H3("Municipio"),
@@ -155,7 +153,7 @@ app.layout = dbc.Container(
                         )
                     ], className='six colums'
                 ),
-                html.Div(
+                dbc.Row(
                     id='div-button-guardar-f',
                     children=[
                         html.Button(
@@ -169,5 +167,4 @@ app.layout = dbc.Container(
     ])
 
 
-if __name__ == "__main__":
-    app.run_server(debug=True)
+layout = dbc.Container(fincas_layout, fluid=True)

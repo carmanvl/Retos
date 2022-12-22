@@ -1,8 +1,17 @@
-# PAGINA DE ARRANQUE DE LA APP
+import dash
+import dash_bootstrap_components as dbc
+from . import navBar 
 
-from flask import Flask
-app = Flask(__name__)
 
-@app.route('/')
-def inicio():
-    return "Hello"
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.SOLAR])
+server = app.server
+
+app.layout = dbc.Container(
+    [
+        navBar.layout,
+    ],
+    fluid=False,
+)
+
+if __name__ == "__main__":
+    app.run_server(debug=True)

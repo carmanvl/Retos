@@ -6,11 +6,13 @@ import numpy as np
 import pandas as pd
 from datetime import datetime as dt
 import plotly.graph_objects as go
+from dash import Input, Output, State, callback
+from pages import registro
 
 # STYLE
 # app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
-dash.register_page(__name__)
+dash.register_page(__name__, name='login', path="/login")
 
 
 # COMPONENTS
@@ -62,14 +64,17 @@ button_registro_u = dbc.Container(
     id='div-button-registro-u',
     children=[
         dbc.Button(
+            # dcc.Link('Registrarme', href=dash.page_registry['pages.registro']['path']),
             'Registrarme',
             id='button-registro-u',
             color="Primary",
             n_clicks=0,
-            className="btn btn-secondary mb-2 w-25"
+            className="btn btn-secondary mb-2 w-25",
+            href="/registro"
         )
     ], className="text-center"
 )
+
 
 logo = dbc.Container(
     id='div-logo-u',
@@ -100,16 +105,21 @@ formCard = dbc.Card(
 )
 
 # LAYOUT
-login_layout = dbc.Container(children=[
+layout = dbc.Container(children=[
     logo,
     formCard
 ],
     fluid=True,
     className="container",
-    style={'backgroundColor': 'white'}
+    #style={'backgroundColor': 'white'}
 )
 
 # CALLBACKS
 
-
-
+@callback(
+    Output("div-logo-u", "children"),
+    [Input("button-registro-u", "n_clicks")]
+)
+def click_registro(n):
+    if n is 1:
+        return registro.layout

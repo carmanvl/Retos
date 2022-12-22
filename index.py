@@ -1,5 +1,7 @@
 # PAGINA EN LA QUE SE ENCUENTRAN LOS ENLACES Y URLS
 
+# NO SIRVE SI NO USO TEMPLATES
+
 import dash
 import dash_bootstrap_components as dbc
 from flask import Flask
@@ -18,7 +20,8 @@ app.layout = url_content_layout
 
 app.validation_layout = dbc.Container([
     url_content_layout,
-    login.login_layout, 
+    login.login_layout,
+    home.home_layout
 
 ])
 
@@ -27,7 +30,11 @@ app.validation_layout = dbc.Container([
 def update_output_div(pathname):
     if pathname == "/login":
         return login.login_layout
+    elif pathname == "/anadirfinca":
+        return anadirFinca.fincas_layout
+    else: 
+        return home.home_layout
 
 # MAIN
 if __name__ == "__main__":
-    app.run_server(debug=True)
+    app.run_server(debug=True) 

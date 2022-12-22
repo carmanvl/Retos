@@ -8,11 +8,9 @@ from datetime import datetime as dt
 import plotly.graph_objects as go
 
 # STYLE
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+dash.register_page(__name__, name='registro', path="/registro")
 
-dash.register_page(__name__)
-
-# COMPONENTEs
+# COMPONENTES
 name_r = dbc.Container(
     id='div-input-name-r',
     children=[
@@ -143,15 +141,15 @@ logo = dbc.Container(
 
 # Componente FORM
 form = dbc.Form(children=[
-    dbc.Row(children=[
-        dbc.Col(name_r),
-        dbc.Col(apellidos_r)
-    ]),
-    html.Hr(className="p-1 bg-transparent"),
-    dbc.Row(children=[
-        dbc.Col(dni_r),
-        dbc.Col(telefono_r)
-    ]),
+    #dbc.Row(children=[
+    #    dbc.Col(name_r),
+    #    dbc.Col(apellidos_r)
+    #]),
+    #html.Hr(className="p-1 bg-transparent"),
+    #dbc.Row(children=[
+    #    dbc.Col(dni_r),
+    #    dbc.Col(telefono_r)
+    #]),
     html.Hr(className="p-1 bg-transparent"),
     dbc.Row(children=[
         dbc.Col(correo_r)
@@ -170,7 +168,7 @@ form = dbc.Form(children=[
 
 
 # LAYOUT
-app.layout = dbc.Container(
+layout = dbc.Container(
     children=[
         logo,
         dcc.Markdown('### **Registro de nuevo usuario**',
@@ -181,7 +179,3 @@ app.layout = dbc.Container(
     className="container",
     style={'backgroundColor': 'white'}
 )
-
-# MAIN
-if __name__ == "__main__":
-    app.run_server(debug=True)

@@ -6,10 +6,11 @@ import pandas as pd
 from datetime import datetime as dt, time
 import plotly.graph_objects as go
 import dash_bootstrap_components as dbc
-from dash import Input, Output
+from dash import Input, Output, callback
 from flask import render_template
 
-app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
+dash.register_page(__name__, name='fincas', path="/finca")
+
 
 tab_detalles = html.Div(
     id='tab-detalles',
@@ -82,7 +83,7 @@ tab_detalles = html.Div(
 )
 
 
-app.layout = dbc.Container(
+layout = dbc.Container(
     [
         dcc.Store(id="store"),
         html.H1("Finca i"),
@@ -106,7 +107,7 @@ app.layout = dbc.Container(
 )
 
 
-@app.callback(
+@callback(
     Output("tab-content", "children"),
     [Input("tabs", "active_tab"), Input("store", "data")],
 )
@@ -117,7 +118,7 @@ def render_tab_content(active_tab, data):
     'active_tab' is.
     """
     if active_tab is not None:
-        
+
         if active_tab == "detalles":
             return tab_detalles
         elif active_tab == "graficos":
@@ -129,7 +130,8 @@ def render_tab_content(active_tab, data):
             )
     return "No tab selected"
 
-@app.callback(Output("store", "data"), [Input("button", "n_clicks")])
+
+@callback(Output("store", "data"), [Input("button", "n_clicks")])
 def generate_graphs(n):
     """
     This callback generates three simple graphs from random data.
@@ -152,8 +154,3 @@ def generate_graphs(n):
 
     # save figures in a dictionary for sending to the dcc.Store
     return {"detalles": scatter, "hist_1": hist_1, "hist_2": hist_2}
-
-
-
-if __name__ == "__main__":
-    app.run_server(debug=True)
