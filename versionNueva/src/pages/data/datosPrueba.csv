@@ -1,0 +1,4 @@
+nombre,variedad,espaciamientoL,espaciamientoA,suelo,riego,recogida,provincia,municipio
+Finca 1,variedad1,2,2,suelo1,si,metodo1,provincia1,municipio1
+Finca 2,variedad2,60,50,suelo2,no,metodo2,provincia2,municipio2
+Finca 3,variedad3,30,3,suelo3,no,metodo3,provincia3,municipio3
