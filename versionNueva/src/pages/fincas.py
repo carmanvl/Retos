@@ -7,77 +7,145 @@ from datetime import datetime as dt, time
 import plotly.graph_objects as go
 import dash_bootstrap_components as dbc
 from dash import Input, Output, callback
-from flask import render_template
-
-dash.register_page(__name__, name='fincas', path="/finca")
 
 
-tab_detalles = html.Div(
-    id='tab-detalles',
+dash.register_page(__name__, name='Finca i', path="/fincai")
+
+
+tab_detalles = dbc.Container(
+    id='tab-detalles-f',
     children=[
         # Campos a visualizar
-        html.Div(
-            id='div-input-name-f',
+        dbc.Row(
+            id='row-input-name-f',
             children=[
-                dbc.Label(
-                    "Nombre de la finca"),
-                # Añadir campo Output finca
-            ],
-            className='six colums'
+                dbc.Col([
+                    dcc.Markdown("##### Nombre de la finca"),
+                    dcc.Input(
+                        id='input-name-f',
+                        type='text',
+                        value=''  # valor recogido de la BD
+                    )
+                ])
+            ]
         ),
-        html.Div(
-            id='div-dropdown-variedad-f',
+        dbc.Row(
+            id='row-input-variedad-f',
             children=[
-                dbc.Label("Variedad"),
-                # Añadir campo Output variedad
-            ], className='six colums'
+                dbc.Col([
+                    dcc.Markdown("##### Variedad"),
+                    dcc.Input(
+                        id='input-variedad-f',
+                        type='text',
+                        value=''  # valor recogido de la BD
+                    )
+                ])
+            ]
         ),
-        html.Div(
-            id='div-input-espaciamiento-f',
+        dbc.Row(
+            id='row-input-espaciamiento-f',
             children=[
-                dbc.Label('Espaciamiento'),
-                # Añadir dos campos Output+H4(m) especiamiento
-            ], className='one colums'
+                dbc.Col([
+                    dcc.Markdown("##### Espaciamiento m x m"),
+                    dbc.Row([
+                        dbc.Col([
+                            dcc.Input(
+                                id='input-espaciamiento1-f',
+                                type='text',
+                                value=''  # valor recogido de la BD
+                            )
+                        ]),
+                        dbc.Col([dcc.Markdown("##### x")],
+                                className="one colums g-0"),
+                        dbc.Col([
+                            dcc.Input(
+                                id='input-espaciamiento2-f',
+                                type='text',
+                                value=''  # valor recogido de la BD
+                            )
+                        ], className="two colums g-0"),
+                    ])
+                ])
+            ], align='start'
         ),
-        html.Div(
-            id='div-dropdown-suelo-f',
+        dbc.Row(
+            id='row-input-suelo-f',
             children=[
-                dbc.Label("Tipo de suelo"),
-                # Añadir campo Output tipo de suelo
-            ], className='six colums'
+                dbc.Col([
+                    dcc.Markdown("##### Tipo de suelo"),
+                    dcc.Input(
+                        id='input-suelo-f',
+                        type='text',
+                        value=''  # valor recogido de la BD
+                    )
+                ])
+            ]
         ),
-        html.Div(
-            id='div-checkbox-riego-f',
+        dbc.Row(
+            id='row-checklist-riego-f',
             children=[
-                dbc.Label("Riego"),
-                # Añadir checkbox riego (solo opcion de resultado)
-            ], className='six columns'
+                dbc.Col([dcc.Markdown("##### Riego")]),
+                dbc.Col([
+                    dcc.Checklist(
+                        id='checklist-riego-nf',
+                        options=[
+                            {'label': '', 'value': 'riego'}
+                        ],
+                        value=['riego']  # valor cogido de la BD
+                    )
+                ])
+            ], className='row'
         ),
-        html.Div(
-            id='div-dropdown-recogida-f',
+        dbc.Row(
+            id='row-input-recogida-f',
             children=[
-                dbc.Label(
-                    "Forma de recogida"),
-                # Añadir campo Output forma de recogida
-            ], className='six colums'
+                dbc.Col([
+                    dcc.Markdown("##### Forma de recogida"),
+                    dcc.Input(
+                        id='input-recogida-f',
+                        type='text',
+                        value=''  # valor recogido de la BD
+                    )
+                ])
+            ], className='row'
         ),
-        html.Div(
-            id='div-dropdown-lugar-f',
+        dbc.Row(
+            id='row-lugar-f',
             children=[
-                dbc.Label("Municipio"),
-                # Añadir campo Output tipo de suelo
-                dbc.Label('Provincia'),
-                # Añadir Output provincia
-            ], className='six colums'
-        ),
-        html.Div(
-            id='div-button-eliminar-f',
-            children=[
-                html.Button(
-                    'Eliminar',
-                    id='button-eliminar-f'
+                dbc.Col(
+                    id='col-dropdown-provincia-f',
+                    children=[
+                        dcc.Markdown("##### Provincia"),
+                        dcc.Input(
+                            id='input-provincia-f',
+                            type='text',
+                            value=''  # valor recogido de la BD
+                        )
+                    ], className='six colums'
+                ),
+                dbc.Col(
+                    id='col-input-municipio-f',
+                    children=[
+                        dcc.Markdown("##### Municipio"),
+                        dcc.Input(
+                            id='input-municipio-f',
+                            type='text',
+                            value=''  # valor recogido de la BD
+                        )
+                    ], className='six colums'
                 )
-            ], className='two colums'
+            ], className='six colums'
+        ),
+        dbc.Row(
+            id='row-button-eliminar-f',
+            children=[
+                dbc.Button(
+                    'Eliminar',
+                    id='button-eliminar-f',
+                    href="/inicio", # Eliminar de la BD
+                    n_clicks=0
+                )
+            ], style={'padding-top': '2%'}
         )
     ]
 )
@@ -86,10 +154,10 @@ tab_detalles = html.Div(
 layout = dbc.Container(
     [
         dcc.Store(id="store"),
-        html.H1("Finca i"),
+        dcc.Markdown("## Finca i"),
         html.Hr(),
         dbc.Button(
-            "Regenerate graphs",
+            "Regenerar gráficos",
             color="primary",
             id="button",
             className="mb-3",
@@ -102,7 +170,7 @@ layout = dbc.Container(
             id="tabs",
             active_tab="detalles",
         ),
-        html.Div(id="tab-content", className="p-4"),
+        dbc.Container(id="tab-content", className="p-4"),
     ]
 )
 

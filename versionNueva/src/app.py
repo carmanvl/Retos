@@ -1,20 +1,22 @@
 import dash
 import dash_bootstrap_components as dbc
-from dash import Input, Output, State, callback
-from pages import ajustes
+from dash import html
 
 
 app = dash.Dash(__name__, use_pages=True,
-                external_stylesheets=[dbc.themes.SOLAR])
+                external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
 
-page_reg = list(dash.page_registry.values())
-for x in page_reg:
-    print(x)
-    print('-------------------------------')
+# page_reg = list(dash.page_registry.values())
+#for x in page_reg:
+#    print(x)
+#    print('-------------------------------')
 
 navbar = dbc.NavbarSimple(id='navBar',children=[
     dbc.Row([
+        # Añadir columna con nombre y logo
+        dbc.Col([ dbc.NavbarBrand('OilWeb', className='ml-2')]),
+        dbc.Col ([html.Img(src=app.get_asset_url('data/oliva.png'), width="75", height="50")]),
         dbc.Col([
             dbc.DropdownMenu(  # De momento tiene todas las páginas, el objetivo es que tenga solo las fincas registradas
                 [
@@ -37,8 +39,8 @@ navbar = dbc.NavbarSimple(id='navBar',children=[
         ])
     ]),
 ],
-    brand="OilWeb",
-    color="primary",
+    # brand="OilWeb",
+    color="green",
     dark=True,
     className="mb-2",
 )
@@ -50,9 +52,6 @@ app.layout = dbc.Container(
     ],
     fluid=False,
 )
-
-# CALLBACKS
-# Boton de ajustes enlace a ajustes.py
 
 
 if __name__ == "__main__":

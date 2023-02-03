@@ -2,17 +2,9 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import dash_bootstrap_components as dbc
-import numpy as np
-import pandas as pd
-from datetime import datetime as dt
-import plotly.graph_objects as go
-from dash import Input, Output, State, callback
-from pages import registro
 
-# STYLE
-# app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
-
-dash.register_page(__name__, name='login', path="/login")
+# Sacar Login de register_page y hacer que sea lo primero que salga al iniciar la app
+dash.register_page(__name__, name='Login', path="/")
 
 
 # COMPONENTS
@@ -55,31 +47,17 @@ button_login_u = dbc.Container(
             id='button-login-u',
             color="Primary",
             n_clicks=0,
-            className="btn btn-success mb-2 w-25"
+            className="btn btn-success mb-2 w-25",
+            href="/inicio"
         )
     ], className="text-center"   # Aqui cogeria el div entero el formato
-)
-
-button_registro_u = dbc.Container(
-    id='div-button-registro-u',
-    children=[
-        dbc.Button(
-            # dcc.Link('Registrarme', href=dash.page_registry['pages.registro']['path']),
-            'Registrarme',
-            id='button-registro-u',
-            color="Primary",
-            n_clicks=0,
-            className="btn btn-secondary mb-2 w-25",
-            href="/registro"
-        )
-    ], className="text-center"
 )
 
 
 logo = dbc.Container(
     id='div-logo-u',
     children=[
-        dcc.Markdown('# **Oilweb**', className="text-left pb-5 pt-2")
+        dcc.Markdown('# **Oilweb**', className="text-left pb-5 pt-2"),
     ]
 )
 
@@ -107,7 +85,7 @@ formCardL = dbc.Card(
 correo_r = dbc.Container(
     id='div-input-correo-r',
     children=[
-        dcc.Markdown("##### Correo electrónico"),
+        dcc.Markdown("##### Correo electrónico", className="text-center"),
         dbc.Input(
             id='input-correo-r',
             placeholder='Ej: user@user.com',
@@ -122,7 +100,7 @@ correo_r = dbc.Container(
 passwd_r = dbc.Container(
     id='div-input-passwd-r',
     children=[
-        dcc.Markdown("##### Contraseña"),
+        dcc.Markdown("##### Contraseña", className="text-center"),
         dbc.Input(
             id='input-passwd-r',
             placeholder='Ej: ksSF8Jcas7',
@@ -137,7 +115,7 @@ passwd_r = dbc.Container(
 repetir_passwd_r = dbc.Container(
     id='div-input-passwd-r',
     children=[
-        dcc.Markdown("##### Repetir contraseña"),
+        dcc.Markdown("##### Repetir contraseña", className="text-center"),
         dbc.Input(
             id='input-passwd-r',
             placeholder='Ej: ksSF8Jcas7',
@@ -157,7 +135,8 @@ button_guardar_r = dbc.Container(
             id='button-guardar-r',
             color='primary',
             n_clicks=0,
-            className="btn btn-success mb-2 w-25"
+            className="btn btn-success mb-2 w-25",
+            href="/login"
         )
     ], className="text-center"
 )
@@ -190,7 +169,7 @@ layout = dbc.Container(children=[
     dbc.Row(logo),
     dbc.Row([
         dbc.Col([formCardL]),
-        dbc.Col([dcc.Markdown('*o*', className="text-center")], className="col-1"),
+        dbc.Col([dcc.Markdown('*o*', className="text-center")], className="col-1"), # Quitar "o" y poner linea divisoria
         dbc.Col([formCardR])
     ])
 ],
@@ -198,13 +177,3 @@ layout = dbc.Container(children=[
     className="container",
     #style={'backgroundColor': 'white'}
 )
-
-# CALLBACKS
-
-#@callback(
-#    Output("div-logo-u", "children"),
-#    [Input("button-registro-u", "n_clicks")]
-#)
-#def click_registro(n):
-#    if n == 1:
-#        return registro.layout
