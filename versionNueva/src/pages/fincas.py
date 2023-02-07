@@ -24,7 +24,8 @@ tab_detalles = dbc.Container(
                     dcc.Input(
                         id='input-name-f',
                         type='text',
-                        value=''  # valor recogido de la BD
+                        value='',  # valor recogido de la BD
+                        readOnly=True
                     )
                 ])
             ]
@@ -37,7 +38,8 @@ tab_detalles = dbc.Container(
                     dcc.Input(
                         id='input-variedad-f',
                         type='text',
-                        value=''  # valor recogido de la BD
+                        value='',  # valor recogido de la BD
+                        readOnly=True
                     )
                 ])
             ]
@@ -52,18 +54,20 @@ tab_detalles = dbc.Container(
                             dcc.Input(
                                 id='input-espaciamiento1-f',
                                 type='text',
-                                value=''  # valor recogido de la BD
-                            )
-                        ]),
-                        dbc.Col([dcc.Markdown("##### x")],
-                                className="one colums g-0"),
-                        dbc.Col([
+                                value='',  # valor recogido de la BD
+                                readOnly=True,
+                                size='10',
+                            ),
+                            dcc.Markdown("##### x"),
                             dcc.Input(
                                 id='input-espaciamiento2-f',
                                 type='text',
-                                value=''  # valor recogido de la BD
+                                value='',  # valor recogido de la BD
+                                readOnly=True,
+                                size='10',
+                                className='position-relative start'
                             )
-                        ], className="two colums g-0"),
+                        ]),
                     ])
                 ])
             ], align='start'
@@ -76,7 +80,8 @@ tab_detalles = dbc.Container(
                     dcc.Input(
                         id='input-suelo-f',
                         type='text',
-                        value=''  # valor recogido de la BD
+                        value='',  # valor recogido de la BD
+                        readOnly=True
                     )
                 ])
             ]
@@ -91,7 +96,7 @@ tab_detalles = dbc.Container(
                         options=[
                             {'label': '', 'value': 'riego'}
                         ],
-                        value=['riego']  # valor cogido de la BD
+                        value=['riego'],  # valor cogido de la BD
                     )
                 ])
             ], className='row'
@@ -104,7 +109,8 @@ tab_detalles = dbc.Container(
                     dcc.Input(
                         id='input-recogida-f',
                         type='text',
-                        value=''  # valor recogido de la BD
+                        value='',  # valor recogido de la BD
+                        readOnly=True
                     )
                 ])
             ], className='row'
@@ -119,7 +125,8 @@ tab_detalles = dbc.Container(
                         dcc.Input(
                             id='input-provincia-f',
                             type='text',
-                            value=''  # valor recogido de la BD
+                            value='',  # valor recogido de la BD
+                            readOnly=True
                         )
                     ], className='six colums'
                 ),
@@ -130,7 +137,8 @@ tab_detalles = dbc.Container(
                         dcc.Input(
                             id='input-municipio-f',
                             type='text',
-                            value=''  # valor recogido de la BD
+                            value='',  # valor recogido de la BD
+                            readOnly=True
                         )
                     ], className='six colums'
                 )
@@ -142,7 +150,7 @@ tab_detalles = dbc.Container(
                 dbc.Button(
                     'Eliminar',
                     id='button-eliminar-f',
-                    href="/inicio", # Eliminar de la BD
+                    href="/inicio",  # Eliminar de la BD
                     n_clicks=0
                 )
             ], style={'padding-top': '2%'}
@@ -154,7 +162,7 @@ tab_detalles = dbc.Container(
 layout = dbc.Container(
     [
         dcc.Store(id="store"),
-        dcc.Markdown("## Finca i"),
+        dcc.Markdown("## Finca i", className="text-success"),
         html.Hr(),
         dbc.Button(
             "Regenerar gráficos",
@@ -171,7 +179,7 @@ layout = dbc.Container(
             active_tab="detalles",
         ),
         dbc.Container(id="tab-content", className="p-4"),
-    ]
+    ], fluid=True
 )
 
 

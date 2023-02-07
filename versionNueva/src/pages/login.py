@@ -53,14 +53,6 @@ button_login_u = dbc.Container(
     ], className="text-center"   # Aqui cogeria el div entero el formato
 )
 
-
-logo = dbc.Container(
-    id='div-logo-u',
-    children=[
-        dcc.Markdown('# **Oilweb**', className="text-left pb-5 pt-2"),
-    ]
-)
-
 formL = dbc.Form(
     id='form-l',
     children=[
@@ -166,14 +158,13 @@ formCardR = dbc.Card(
 
 # LAYOUT
 layout = dbc.Container(children=[
-    dbc.Row(logo),
     dbc.Row([
         dbc.Col([formCardL]),
-        dbc.Col([dcc.Markdown('*o*', className="text-center")], className="col-1"), # Quitar "o" y poner linea divisoria
+        dbc.Col([dcc.Markdown('ó', className="text-center fst-italic position-relative top-50")], className="col-1"), # Quitar "o" y poner linea divisoria
         dbc.Col([formCardR])
-    ])
+    ], className="p-4")
 ],
     fluid=True,
     className="container",
-    #style={'backgroundColor': 'white'}
+    #style={'backgroundColor': 'green', 'opacity': 0.3}
 )

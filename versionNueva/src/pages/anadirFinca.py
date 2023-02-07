@@ -20,7 +20,8 @@ fincas_layout = dbc.Container(
                                 id='input-name-nf',
                                 placeholder='Ej: Nombre',
                                 type='text',
-                                value=''
+                                value='',
+                                size='100'
                             )
                         ])                       
                     ]
