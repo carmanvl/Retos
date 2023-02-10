@@ -3,7 +3,7 @@ import dash_core_components as dcc
 import dash_bootstrap_components as dbc
 
 
-dash.register_page(__name__, name='Inicio', path='/inicio')
+dash.register_page(__name__, name='Añadir nueva finca', path='/inicio')
 
 fincas_layout = dbc.Container(
     [
@@ -21,10 +21,10 @@ fincas_layout = dbc.Container(
                                 placeholder='Ej: Nombre',
                                 type='text',
                                 value='',
-                                size='100'
+                                className="text-start col-12",
                             )
-                        ])                       
-                    ]
+                        ], className='col-12')
+                    ], className='p-4'
                 ),
                 dbc.Row(
                     id='row-dropdown-variedad-nf',
@@ -35,41 +35,48 @@ fincas_layout = dbc.Container(
                                 id='dropdown-variedad-nf',
                                 options=[
                                     {'label': 'Variedad1',
-                                    'value': 'variedad1'},
+                                     'value': 'variedad1'},
                                     {'label': 'Variedad2',
-                                    'value': 'variedad2'},
+                                     'value': 'variedad2'},
                                     {'label': 'Variedad3',
-                                    'value': 'variedad3'}
+                                     'value': 'variedad3'}
                                 ],
                                 value='variedad1',
                                 multi=True
                             )
-                        ]) 
+                        ], className='col-12')
                     ]
                 ),
                 dbc.Row(
                     id='row-input-espaciamiento-nf',
                     children=[
                         dbc.Col([
-                            dcc.Markdown("##### Espaciamiento m x m"),
+                            dbc.Row(dcc.Markdown("##### Espaciamiento m x m")),
                             dbc.Row([
                                 dbc.Col([
                                     dcc.Input(
                                         id='input-espaciamiento1-nf',
                                         type='text',
-                                        value=''
+                                        value='',
+                                        size="10",
+                                        placeholder="m",
+                                        className="text-center"
                                     )
-                                ]),                               
-                                dbc.Col([dcc.Markdown("##### x")], className="one colums g-0"),
+                                ], className="col-1"),
+                                dbc.Col([dcc.Markdown("##### x")],
+                                        className="col-1 text-center"),
                                 dbc.Col([
                                     dcc.Input(
                                         id='input-espaciamiento2-nf',
                                         type='text',
-                                        value=''
+                                        value='',
+                                        size="10",
+                                        placeholder="m",
+                                        className="text-center"
                                     )
-                                ],className="two colums g-0"),                                
-                            ])
-                        ])                        
+                                ], className="col-2 g-0"),
+                            ], className="row align-items-start")
+                        ], className='col-12')
                     ], align='start'
                 ),
                 dbc.Row(
@@ -87,13 +94,14 @@ fincas_layout = dbc.Container(
                                 value='',
                                 multi=True
                             )
-                        ])                        
+                        ], className="col-12")
                     ]
                 ),
                 dbc.Row(
                     id='row-checklist-riego-nf',
                     children=[
-                        dbc.Col([dcc.Markdown("##### Riego")]),
+                        dbc.Col([dcc.Markdown("##### Riego")],
+                                className="col-2"),
                         dbc.Col([
                             dcc.Checklist(
                                 id='checklist-riego-nf',
@@ -102,7 +110,9 @@ fincas_layout = dbc.Container(
                                 ],
                                 value=['riego']
                             )
-                        ])                      
+                        ],
+                            className='col-1',
+                            align='start')
                     ], className='row'
                 ),
                 dbc.Row(
@@ -123,7 +133,7 @@ fincas_layout = dbc.Container(
                                 value='',
                                 multi=True
                             )
-                        ])                       
+                        ])
                     ], className='row'
                 ),
                 dbc.Row(
@@ -145,7 +155,7 @@ fincas_layout = dbc.Container(
                                     ],
                                     value=''
                                 )
-                            ], className='six colums'
+                            ], className='col-3'
                         ),
                         dbc.Col(
                             id='col-dropdown-municipio-nf',
@@ -163,9 +173,9 @@ fincas_layout = dbc.Container(
                                     ],
                                     value=''
                                 )
-                            ], className='six colums'
+                            ], className='col-3'
                         )
-                    ], className='six colums'
+                    ], className='col-12'
                 ),
                 dbc.Row(
                     id='row-button-guardar-nf',
@@ -178,9 +188,15 @@ fincas_layout = dbc.Container(
                         )
                     ], style={'padding-top': '2%'}
                 )
-            ]
+            ], fluid=True
         )
-    ])
+    ], fluid=True)
 
 
-layout = dbc.Container(fincas_layout, fluid=True)
+layout = dbc.Container([
+    dbc.Row([
+        dbc.Col([
+            dbc.Form(fincas_layout)
+        ], className='col-8')
+    ], className='justify-content-center')
+    ], fluid=True)

@@ -3,9 +3,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 import dash_bootstrap_components as dbc
 
-# Sacar Login de register_page y hacer que sea lo primero que salga al iniciar la app
 dash.register_page(__name__, name='Login', path="/")
-
 
 # COMPONENTS
 # Componentes login
@@ -128,7 +126,7 @@ button_guardar_r = dbc.Container(
             color='primary',
             n_clicks=0,
             className="btn btn-success mb-2 w-25",
-            href="/login"
+            href="/"
         )
     ], className="text-center"
 )
@@ -159,10 +157,10 @@ formCardR = dbc.Card(
 # LAYOUT
 layout = dbc.Container(children=[
     dbc.Row([
-        dbc.Col([formCardL]),
-        dbc.Col([dcc.Markdown('ó', className="text-center fst-italic position-relative top-50")], className="col-1"), # Quitar "o" y poner linea divisoria
-        dbc.Col([formCardR])
-    ], className="p-4")
+        dbc.Col([formCardL], className="border"),
+        #dbc.Col([dcc.Markdown('ó', className="text-center fst-italic position-relative top-50")], className="col-1"), # Quitar "o" y poner linea divisoria
+        dbc.Col([formCardR], className="border")
+    ], className="border")
 ],
     fluid=True,
     className="container",

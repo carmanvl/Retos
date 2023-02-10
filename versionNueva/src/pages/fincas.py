@@ -8,7 +8,7 @@ import plotly.graph_objects as go
 import dash_bootstrap_components as dbc
 from dash import Input, Output, callback
 
-
+# Una página por cada finca registrada 
 dash.register_page(__name__, name='Finca i', path="/fincai")
 
 
