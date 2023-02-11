@@ -13,12 +13,12 @@ correo_u = dbc.Container(
         dcc.Markdown('##### Correo electrónico', className="text-center"),
         dbc.Input(
             id='input-correo-u',
-            placeholder='Escriba aquí...',
+            placeholder='Ej: user@user.com',
             type='email',
             value='',
             className="input-group mb-2 mr-sm-2 form-control"
         ),
-        dbc.FormText("Escriba su correo aquí... Ej: user@user.com")
+        dbc.FormText("Escriba su correo electrónico aquí... ")
     ]
 )
 
@@ -48,7 +48,7 @@ button_login_u = dbc.Container(
             className="btn btn-success mb-2 w-25",
             href="/inicio"
         )
-    ], className="text-center"   # Aqui cogeria el div entero el formato
+    ], className="text-center"  
 )
 
 formL = dbc.Form(
@@ -157,12 +157,11 @@ formCardR = dbc.Card(
 # LAYOUT
 layout = dbc.Container(children=[
     dbc.Row([
-        dbc.Col([formCardL], className="border"),
-        #dbc.Col([dcc.Markdown('ó', className="text-center fst-italic position-relative top-50")], className="col-1"), # Quitar "o" y poner linea divisoria
-        dbc.Col([formCardR], className="border")
+        dbc.Col([formCardL], className=""),
+        dbc.Col([dcc.Markdown('ó', className="text-center fst-italic position-relative top-50")], className="col-1"), # Quitar "o" y poner linea divisoria
+        dbc.Col([formCardR], className="")
     ], className="border")
 ],
     fluid=True,
     className="container",
-    #style={'backgroundColor': 'green', 'opacity': 0.3}
 )
