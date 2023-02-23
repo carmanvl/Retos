@@ -57,7 +57,7 @@ tab_detalles = dbc.Container(
             id='row-input-espaciamiento-riego-nf',
             children=[
                 dbc.Col([
-                    dbc.Row(dcc.Markdown("##### Espaciamiento m x m")),
+                    dbc.Row(dcc.Markdown("##### Espaciamiento")),
                     dbc.Row([
                         dbc.Col([
                             dcc.Input(
@@ -190,7 +190,9 @@ tab_detalles = dbc.Container(
                     'Eliminar',
                     id='button-eliminar-f',
                     href="/inicio",  # Eliminar de la BD
-                    n_clicks=0
+                    n_clicks=0,
+                    color='#556B2F',
+                    style={'color':'#FFFAF0', 'background':'#556B2F'}
                 )
             ], style={'padding-top': '2%'}
         )
@@ -198,27 +200,35 @@ tab_detalles = dbc.Container(
 )
 
 
-layout = dbc.Container(
-    [
-        dcc.Store(id="store"),
-        dcc.Markdown("## Finca i", className="text-success"),
-        html.Hr(),
-        dbc.Button(
-            "Regenerar gráficos",
-            color="primary",
-            id="button",
-            className="mb-3",
-        ),
-        dbc.Tabs(
-            [
-                dbc.Tab(label="Detalles", tab_id="detalles"),
-                dbc.Tab(label="Gráficos", tab_id="graficos"),
-            ],
-            id="tabs",
-            active_tab="detalles",
-        ),
-        dbc.Container(id="tab-content", className="p-4"),
-    ], fluid=True
+layout = dbc.Container([
+    dbc.Row([
+        dbc.Col([
+            dbc.Container([
+                dcc.Store(id="store"),
+                dcc.Markdown("## Finca i", className=""),
+                html.Hr(),
+                dbc.Button(
+                    "Regenerar gráficos",
+                    id="button",
+                    className="mb-3",
+                    color='#556B2F',
+                    style={'color':'#FFFAF0', 'background':'#556B2F'}
+                ),
+                dbc.Tabs(
+                    [
+                        dbc.Tab(label="Detalles", tab_id="detalles"),
+                        dbc.Tab(label="Gráficos", tab_id="graficos"),
+                    ],
+                    id="tabs",
+                    active_tab="detalles",
+                ),
+                dbc.Container(id="tab-content", className="p-4"),
+            ])
+
+        ], className="col-12 justify-content-center")
+
+    ])
+], fluid=True, style={'color': '#556B2F'}
 )
 
 

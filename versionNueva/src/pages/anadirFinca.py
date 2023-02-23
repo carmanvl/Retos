@@ -52,7 +52,7 @@ fincas_layout = dbc.Container(
                     id='row-input-espaciamiento-riego-nf',
                     children=[
                         dbc.Col([
-                            dbc.Row(dcc.Markdown("##### Espaciamiento m x m")),
+                            dbc.Row(dcc.Markdown("##### Espaciamiento")),
                             dbc.Row([
                                 dbc.Col([
                                     dcc.Input(
@@ -185,9 +185,11 @@ fincas_layout = dbc.Container(
                             'Guardar',
                             id='button-guardar-nf',
                             href="/inicio",
-                            n_clicks=0
+                            n_clicks=0,
+                            color='#556B2F',
+                            style={'color':'#FFFAF0', 'background':'#556B2F'}
                         )
-                    ], style={'padding-top': '2%'}, className='p-3'
+                    ], className='p-3'
                 )
             ], fluid=True
         )
@@ -199,5 +201,5 @@ layout = dbc.Container([
         dbc.Col([
             dbc.Form(fincas_layout)
         ], className='col-10')
-    ], className='justify-content-center')
+    ], className='justify-content-center', style={'color':'#556B2F'})
 ], fluid=True)

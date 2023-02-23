@@ -43,9 +43,10 @@ button_login_u = dbc.Container(
         dbc.Button(
             'Iniciar sesión',
             id='button-login-u',
-            color="Primary",
             n_clicks=0,
-            className="btn btn-success mb-2 w-25",
+            color='#556B2F',
+            style={'color':'#FFFAF0', 'background':'#556B2F'},
+            className="mb-2 w-50",
             href="/inicio"
         )
     ], className="text-center"  
@@ -123,9 +124,10 @@ button_guardar_r = dbc.Container(
         dbc.Button(
             'Registrarme',
             id='button-guardar-r',
-            color='primary',
+            color='#556B2F',
+            style={'color':'#FFFAF0', 'background':'#556B2F'},
             n_clicks=0,
-            className="btn btn-success mb-2 w-25",
+            className="mb-2 w-50",
             href="/"
         )
     ], className="text-center"
@@ -157,11 +159,12 @@ formCardR = dbc.Card(
 # LAYOUT
 layout = dbc.Container(children=[
     dbc.Row([
-        dbc.Col([formCardL], className=""),
+        html.Hr(className="p-4 bg-transparent"),
+        dbc.Col([formCardL], className="col-5"), # Incluir margen izquierdo
         dbc.Col([dcc.Markdown('ó', className="text-center fst-italic position-relative top-50")], className="col-1"), # Quitar "o" y poner linea divisoria
-        dbc.Col([formCardR], className="")
-    ], className="border")
+        dbc.Col([formCardR], className="col-5")
+    ], className="")
 ],
     fluid=True,
-    className="container",
+    className="container", style={'color': '#556B2F'}
 )
