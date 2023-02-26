@@ -24,8 +24,8 @@ SIDEBAR_STYLE = {
 sidebar = dbc.Container([
     html.Img(src=app.get_asset_url('data/OliWeb2.png'), width="200",
              height="200", className=""),
-    # Nombre de la app con enlace al inicio, actualmente desactivado         
-    # dbc.NavbarBrand('OliWeb', href='/inicio', className="fs-2", style={'color': '#FFFAF0'}),  
+    # Nombre de la app con enlace al inicio, actualmente desactivado
+    # dbc.NavbarBrand('OliWeb', href='/inicio', className="fs-2", style={'color': '#FFFAF0'}),
     html.Hr(),
     html.P("Información sobre las fincas",
            className="lead", style={'color': ' #FFFAF0'}),
@@ -51,16 +51,28 @@ sidebar = dbc.Container([
         pills=True,
     ),
     dbc.Nav([
-            dbc.Button(
-                'Ajustes',
-                id='button-ajustes',
-                n_clicks=0,
-                className="btn position-absolute bottom-0 start-0 w-100",
-                color='#808000',
-                style={'color': '#FFFAF0', 'background': '#808000'},
-                href="/ajustes",
-            )
-            ])
+        dbc.Button(
+            'Ajustes',
+            id='button-ajustes',
+            n_clicks=0,
+            className="btn w-100",
+            color='#808000',
+            style={'color': '#FFFAF0', 'background': '#808000'},
+            href="/ajustes",
+        ),
+        dbc.Button(
+            'Cerrar sesión',
+            id='button-cerrar',
+            n_clicks=0,
+            className="btn w-100",
+            color='#dedeb9',
+            style={'color': '#808000', 'background': '#dedeb9'},
+            href="/",
+        )
+    ], className="position-absolute bottom-0 start-0 w-100"),
+    dbc.Nav([
+
+    ])
 ],
     style=SIDEBAR_STYLE,
     fluid=True
