@@ -5,7 +5,7 @@ import dash_bootstrap_components as dbc
 
 dash.register_page(__name__, name='Login', path="/")
 
-# COMPONENTS
+
 # Componentes login
 correo_u = dbc.Container(
     id='div-input-correo-u',
@@ -59,9 +59,7 @@ formL = dbc.Form(
             html.Hr(className="p-1 bg-transparent"),
             passwd_u,
             html.Hr(className="p-3 bg-transparent"),
-            button_login_u,
-            #dcc.Markdown('*or*', className="text-black-50 text-center"),
-            #button_registro_u
+            button_login_u
     ], className="form-group ")
 
 formCardL = dbc.Card(
@@ -70,7 +68,7 @@ formCardL = dbc.Card(
         html.Hr(),
         html.Hr(className="p-2 bg-transparent"),
         formL
-        ], className="", style={'background-color':'#dedeb9'} # d-inline-block ¿?¿?
+        ], style={'background-color':'#dedeb9'}
 )
 
 # Componentes registro
@@ -154,17 +152,16 @@ formCardR = dbc.Card(
         html.Hr(),
         html.Hr(className="p-2 bg-transparent"),
         formR
-        ], className="", style={'background-color':'#dedeb9'} # d-inline-block ¿?¿?
+        ], className="", style={'background-color':'#dedeb9'} 
 )
 
 
-# LAYOUT
+# Layout página de login
 layout = dbc.Container(children=[
     dbc.Row([
         html.Hr(className="p-3 bg-transparent"),
-        dbc.Row([formCardL], className="col-8"), # Incluir margen izquierdo
+        dbc.Row([formCardL], className="col-8"), 
         dbc.Row([dcc.Markdown('ó', className="text-center fst-italic p-3")], className="col-12"),
-        #html.Hr(className="p-1 bg-transparent"),
         dbc.Row([formCardR], className="col-8")
     ], className="justify-content-center",
 )

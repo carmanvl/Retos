@@ -12,193 +12,233 @@ from dash import Input, Output, callback
 dash.register_page(__name__, name='Finca i', path="/fincai")
 
 
+# Componentes de una finca
+# Los valores de los componentes deben recogerse de la base de datos, pudiendo modificarse para su posterior guardado
+name = dcc.Input(
+    id='input-name-f',
+    placeholder='Ej: Nombre',
+    type='text',
+    value='',
+    className="text-start col-12 input-group form-control",
+)
+
+variedad = dcc.Dropdown(
+    id='dropdown-variedad-f',
+    options=[
+        {'label': 'Variedad1',
+         'value': 'variedad1'},
+        {'label': 'Variedad2',
+         'value': 'variedad2'},
+        {'label': 'Variedad3',
+         'value': 'variedad3'}
+    ],
+    value='',
+    multi=True,  # True para elegir más de una opción, False solo una
+    className='input-group '
+)
+
+espaciamiento = dbc.Row([
+    dbc.Col([
+        dcc.Input(
+            id='input-espaciamiento1-f',
+            type='text',
+            value='',
+            size="20",
+            placeholder="m",
+            className="text-center input-group form-control"
+        )
+    ], className="col-3"),
+    dbc.Col([dcc.Markdown("##### x")],
+            className="col-1 text-center"),
+    dbc.Col([
+        dcc.Input(
+            id='input-espaciamiento2-f',
+            type='text',
+            value='',
+            size="20",
+            placeholder="m",
+            className="text-center input-group form-control"
+        )
+    ], className="col-3"),
+], className="row align-items-start")
+
+riego = dcc.Checklist(
+    id='checklist-riego-f',
+    options=[
+        {'label': '', 'value': 'riego'}
+    ],
+    value=['riego'],
+    className='input-group justify-content-center',
+)
+
+suelo = dcc.Dropdown(
+    id='dropdown-suelo-f',
+    options=[
+        {'label': 'Suelo1', 'value': 'suelo1'},
+        {'label': 'Suelo2', 'value': 'suelo2'},
+        {'label': 'Suelo3', 'value': 'suelo3'}
+    ],
+    value='',
+    multi=True,
+    className='input-group'
+)
+
+recogida = dcc.Dropdown(
+    id='dropdown-recogida-f',
+    options=[
+        {'label': 'Metodo1',
+         'value': 'metodo1'},
+        {'label': 'Metodo2',
+         'value': 'metodo2'},
+        {'label': 'Metodo3',
+         'value': 'metodo3'}
+    ],
+    value='',
+    multi=True,
+    className='input-group'
+)
+
+provincia = dcc.Dropdown(
+    id='dropdown-provincia-f',
+    options=[
+        {'label': 'Provincia1',
+         'value': 'provincia1'},
+        {'label': 'Provincia2',
+         'value': 'provincia2'},
+        {'label': 'Provincia3',
+         'value': 'provincia3'}
+    ],
+    value='',
+    className='input-group'
+)
+
+municipio = dcc.Dropdown(
+    id='dropdown-municipio-f',
+    options=[
+        {'label': 'Municipio1',
+         'value': 'municipio1'},
+        {'label': 'Municipio2',
+         'value': 'municipio2'},
+        {'label': 'Municipio3',
+         'value': 'municipio3'}
+    ],
+    value=''
+)
+
+# Elimina de la base de datos la finca y vuelva al inicio
+boton_eliminar = dbc.Button(
+    'Eliminar',
+    id='button-guardar-f',
+    href="/inicio",
+    n_clicks=0,
+    color='#556B2F',
+    style={'color': '#FFFAF0', 'background': '#922b21 '}
+)
+
+# Guarda los nuevos valores de la finca en la BD y recarga la página
+boton_modificar = dbc.Button(
+    'Modificar',
+    id='button-modificar-f',
+    href="/fincai",
+    n_clicks=0,
+    color='#556B2F',
+    style={'color': '#FFFAF0', 'background': '#556B2F'}
+)
+
+# Estructura de la pestaña de detalles
 tab_detalles = dbc.Container(
-    id='tab-detalles-f',
+    id='div-f',
     children=[
-        # Campos a visualizar
         dbc.Row(
-            id='row-input-name-nf',
+            id='row-input-name-f',
             children=[
                 dbc.Col([
                     dcc.Markdown("##### Nombre de la finca"),
-                    dcc.Input(
-                        id='input-name-nf',
-                        placeholder='Ej: Nombre',
-                        type='text',
-                        value='',
-                        className="text-start col-12 input-group form-control",
-                    )
+                    name
                 ], className='col-12')
             ], className='p-3'
         ),
         dbc.Row(
-            id='row-dropdown-variedad-nf',
+            id='row-dropdown-variedad-f',
             children=[
                 dbc.Col([
                     dcc.Markdown("##### Variedad"),
-                    dcc.Dropdown(   # Multi¿?
-                        id='dropdown-variedad-nf',
-                        options=[
-                                    {'label': 'Variedad1',
-                                     'value': 'variedad1'},
-                                    {'label': 'Variedad2',
-                                     'value': 'variedad2'},
-                                    {'label': 'Variedad3',
-                                     'value': 'variedad3'}
-                        ],
-                        value='',
-                        multi=True,
-                        className='input-group '
-                    )
+                    variedad
                 ], className='col-12')
             ], className='p-3'
         ),
         dbc.Row(
-            id='row-input-espaciamiento-riego-nf',
+            id='row-input-espaciamiento-riego-f',
             children=[
                 dbc.Col([
                     dbc.Row(dcc.Markdown("##### Espaciamiento")),
-                    dbc.Row([
-                        dbc.Col([
-                            dcc.Input(
-                                id='input-espaciamiento1-nf',
-                                type='text',
-                                value='',
-                                size="20",
-                                placeholder="m",
-                                className="text-center input-group form-control"
-                            )
-                        ], className="col-3"),
-                        dbc.Col([dcc.Markdown("##### x")],
-                                className="col-1 text-center"),
-                        dbc.Col([
-                            dcc.Input(
-                                id='input-espaciamiento2-nf',
-                                type='text',
-                                value='',
-                                size="20",
-                                placeholder="m",
-                                className="text-center input-group form-control"
-                            )
-                        ], className="col-3"),
-                    ], className="row align-items-start")
+                    espaciamiento
                 ], className='col-7'),
                 dbc.Col([
                     dbc.Col([
                         dcc.Markdown("##### Riego"),
-                        dcc.Checklist(
-                            id='checklist-riego-nf',
-                            options=[
-                                {'label': '', 'value': 'riego'}
-                            ],
-                            value=['riego'],
-                            className='input-group justify-content-center',
-                        )],
+                        riego
+                    ],
                         className='col-2 me-auto',
                         align='start')
                 ])
             ], align='start', className='p-3'
         ),
         dbc.Row(
-            id='row-dropdown-suelo-nf',
+            id='row-dropdown-suelo-f',
             children=[
                 dbc.Col([
                     dcc.Markdown("##### Tipo de suelo"),
-                    dcc.Dropdown(   # Multi¿?
-                        id='dropdown-suelo-nf',
-                        options=[
-                                    {'label': 'Suelo1', 'value': 'suelo1'},
-                                    {'label': 'Suelo2', 'value': 'suelo2'},
-                                    {'label': 'Suelo3', 'value': 'suelo3'}
-                        ],
-                        value='',
-                        multi=True,
-                        className='input-group'
-                    )
+                    suelo
                 ], className="col-12")
             ], className='p-3'
         ),
         dbc.Row(
-            id='row-dropdown-recogida-nf',
+            id='row-dropdown-recogida-f',
             children=[
                 dbc.Col([
                     dcc.Markdown("##### Forma de recogida"),
-                    dcc.Dropdown(   # Multi¿?
-                        id='dropdown-recogida-nf',
-                        options=[
-                                    {'label': 'Metodo1',
-                                     'value': 'metodo1'},
-                                    {'label': 'Metodo2',
-                                     'value': 'metodo2'},
-                                    {'label': 'Metodo3',
-                                     'value': 'metodo3'}
-                        ],
-                        value='',
-                        multi=True,
-                        className='input-group'
-                    )
+                    recogida
                 ])
             ], className='p-3'
         ),
         dbc.Row(
-            id='row-dropdown-lugar-nf',
+            id='row-dropdown-lugar-f',
             children=[
                 dbc.Col(
-                    id='col-dropdown-provincia-nf',
+                    id='col-dropdown-provincia-f',
                     children=[
                         dcc.Markdown("##### Provincia"),
-                        dcc.Dropdown(   # Multi¿?
-                            id='dropdown-provincia-nf',
-                            options=[
-                                        {'label': 'Provincia1',
-                                         'value': 'provincia1'},
-                                        {'label': 'Provincia2',
-                                         'value': 'provincia2'},
-                                        {'label': 'Provincia3',
-                                         'value': 'provincia3'}
-                            ],
-                            value='',
-                            className='input-group'
-                        )
+                        provincia
                     ], className='col-5 me-auto'
                 ),
                 dbc.Col(
-                    id='col-dropdown-municipio-nf',
+                    id='col-dropdown-municipio-f',
                     children=[
                         dcc.Markdown("##### Municipio"),
-                        dcc.Dropdown(   # Multi¿?
-                            id='dropdown-municipio-nf',
-                            options=[
-                                        {'label': 'Municipio1',
-                                         'value': 'municipio1'},
-                                        {'label': 'Municipio2',
-                                         'value': 'municipio2'},
-                                        {'label': 'Municipio3',
-                                         'value': 'municipio3'}
-                            ],
-                            value=''
-                        )
+                        municipio
                     ], className='col-5 me-auto'
                 )
             ], className='p-3'
         ),
+        html.Hr(className="p-2 bg-transparent"),
         dbc.Row(
-            id='row-button-eliminar-f',
+            id='row-button-modificar-f',
             children=[
-                dbc.Button(
-                    'Eliminar',
-                    id='button-eliminar-f',
-                    href="/inicio",  # Eliminar de la BD
-                    n_clicks=0,
-                    color='#556B2F',
-                    style={'color':'#FFFAF0', 'background':'#556B2F'}
-                )
-            ], style={'padding-top': '2%'}
+                boton_modificar
+            ], className='p-3'
+        ),
+        dbc.Row(
+            id='row-button-guardar-f',
+            children=[
+                boton_eliminar
+            ], className='p-3'
         )
-    ]
+    ], fluid=True
 )
 
 
+# Layout principal de la página de una finca
 layout = dbc.Container([
     dbc.Row([
         dbc.Col([
@@ -211,7 +251,7 @@ layout = dbc.Container([
                     id="button",
                     className="mb-3",
                     color='#556B2F',
-                    style={'color':'#FFFAF0', 'background':'#556B2F'}
+                    style={'color': '#FFFAF0', 'background': '#556B2F'}
                 ),
                 dbc.Tabs(
                     [
@@ -230,6 +270,8 @@ layout = dbc.Container([
 ], fluid=True, style={'color': '#556B2F'}
 )
 
+# Callback para los tabs
+
 
 @callback(
     Output("tab-content", "children"),
@@ -247,12 +289,14 @@ def render_tab_content(active_tab, data):
             return tab_detalles
         elif active_tab == "graficos":
             return dbc.Row(
-                [
+                [   # Aqui se incluyen los gráficos a visualizar, en un futuro debería modularizarse
                     dbc.Col(dcc.Graph(figure=data["hist_1"]), width=6),
                     dbc.Col(dcc.Graph(figure=data["hist_2"]), width=6),
                 ]
             )
     return "No tab selected"
+
+# Callback para los gráficos
 
 
 @callback(Output("store", "data"), [Input("button", "n_clicks")])
