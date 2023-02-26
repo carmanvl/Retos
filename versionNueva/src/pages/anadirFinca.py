@@ -7,7 +7,7 @@ dash.register_page(__name__, name='Añadir nueva finca', path='/inicio')
 
 fincas_layout = dbc.Container(
     [
-        dcc.Markdown('## Añadir nueva finca', className="text-center"),
+        dcc.Markdown('## **Añadir nueva finca**', className="text-center"),
         dbc.Container(
             id='div-nf',
             children=[
@@ -41,7 +41,7 @@ fincas_layout = dbc.Container(
                                     {'label': 'Variedad3',
                                      'value': 'variedad3'}
                                 ],
-                                value='variedad1',
+                                value='',
                                 multi=True,
                                 className='input-group '
                             )
@@ -87,10 +87,9 @@ fincas_layout = dbc.Container(
                                         {'label': '', 'value': 'riego'}
                                     ],
                                     value=['riego'],
-                                    className='input-group',
-                                    #inputStyle=''
+                                    className='input-group justify-content-center',
                                 )],
-                                className='col-1 me-auto',
+                                className='col-2 me-auto',
                                 align='start')
                         ])
                     ], align='start', className='p-3'

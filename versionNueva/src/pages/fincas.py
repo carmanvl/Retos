@@ -46,7 +46,7 @@ tab_detalles = dbc.Container(
                                     {'label': 'Variedad3',
                                      'value': 'variedad3'}
                         ],
-                        value='variedad1',
+                        value='',
                         multi=True,
                         className='input-group '
                     )
@@ -92,10 +92,9 @@ tab_detalles = dbc.Container(
                                 {'label': '', 'value': 'riego'}
                             ],
                             value=['riego'],
-                            className='input-group',
-                            # inputStyle=''
+                            className='input-group justify-content-center',
                         )],
-                        className='col-1 me-auto',
+                        className='col-2 me-auto',
                         align='start')
                 ])
             ], align='start', className='p-3'
@@ -205,7 +204,7 @@ layout = dbc.Container([
         dbc.Col([
             dbc.Container([
                 dcc.Store(id="store"),
-                dcc.Markdown("## Finca i", className=""),
+                dcc.Markdown("## **Finca i**", className=""),
                 html.Hr(),
                 dbc.Button(
                     "Regenerar gráficos",

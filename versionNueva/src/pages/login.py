@@ -66,10 +66,11 @@ formL = dbc.Form(
 
 formCardL = dbc.Card(
     children=[
-        dcc.Markdown('### **Inicio de sesión**', className="text-center bg-secondary text-white"),
+        dcc.Markdown('### **Inicio de sesión**', className="text-center", style={'color':'#556B2F'}),
+        html.Hr(),
         html.Hr(className="p-2 bg-transparent"),
         formL
-        ], className="bg-light" # d-inline-block ¿?¿?
+        ], className="", style={'background-color':'#dedeb9'} # d-inline-block ¿?¿?
 )
 
 # Componentes registro
@@ -149,21 +150,24 @@ formR = dbc.Form(children=[
 
 formCardR = dbc.Card(
     children=[
-        dcc.Markdown('### **Registro de usuario**', className="text-center bg-secondary text-white"),
+        dcc.Markdown('### **Registro de usuario**', className="text-center", style={'color':'#556B2F'}),
+        html.Hr(),
         html.Hr(className="p-2 bg-transparent"),
         formR
-        ], className="bg-light" # d-inline-block ¿?¿?
+        ], className="", style={'background-color':'#dedeb9'} # d-inline-block ¿?¿?
 )
 
 
 # LAYOUT
 layout = dbc.Container(children=[
     dbc.Row([
-        html.Hr(className="p-4 bg-transparent"),
-        dbc.Col([formCardL], className="col-5"), # Incluir margen izquierdo
-        dbc.Col([dcc.Markdown('ó', className="text-center fst-italic position-relative top-50")], className="col-1"), # Quitar "o" y poner linea divisoria
-        dbc.Col([formCardR], className="col-5")
-    ], className="")
+        html.Hr(className="p-3 bg-transparent"),
+        dbc.Row([formCardL], className="col-8"), # Incluir margen izquierdo
+        dbc.Row([dcc.Markdown('ó', className="text-center fst-italic p-3")], className="col-12"),
+        #html.Hr(className="p-1 bg-transparent"),
+        dbc.Row([formCardR], className="col-8")
+    ], className="justify-content-center",
+)
 ],
     fluid=True,
     className="container", style={'color': '#556B2F'}
